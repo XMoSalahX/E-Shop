@@ -40,7 +40,16 @@ route(app);
 export default app;
 
 // Swagger API Docs
-
+// Groups
+// - User group
+/**
+ * @swagger
+ * tags:
+ *   name: User Endpoint
+ *   description: CRUD operation for user
+ */
+//////////////////////////////////////////////////////////////////////////////////
+// Create user Schema
 /**
  * @swagger
  * components:
@@ -73,13 +82,7 @@ export default app;
  *         responsibility: Admin
  */
 
-/**
- * @swagger
- * tags:
- *   name: User Endpoint
- *   description: CRUD operation for user
- */
-
+// User Reuest
 /**
  * @swagger
  * /createuser:
@@ -96,3 +99,4 @@ export default app;
  *       200:
  *         description: Insert New user in database
  */
+///////////////////////////////////////////////////////////////////////////
