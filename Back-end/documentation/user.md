@@ -6,7 +6,7 @@
 
 * You will send json object in post request like this:
 
-```json
+```javascript
   {
     "firstName": "Mohammed",
     "lastName":"Salah",
