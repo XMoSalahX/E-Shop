@@ -85,7 +85,7 @@ export default app;
  * /createuser:
  *   post:
  *     summary: Insert new user in database
- *     tags: [Create User]
+ *     tags: [User Endpoint]
  *     responses:
  *       200:
  *         description: The list of the books
