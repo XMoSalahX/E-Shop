@@ -8,10 +8,10 @@
 
 ```javascript
   {
-    "firstName": "Mohammed",
-    "lastName":"Salah",
-    "email":"mohammedsalah605s5@gmail.com",
-    "password":"Mohammed123#",
-    "responsibility":"Admin"
+    firstName: "Mohammed",
+    lastName:"Salah",
+    email:"mohammedsalah605s5@gmail.com",
+    password:"Mohammed123#",
+    responsibility:"Admin"
 }
 ```
