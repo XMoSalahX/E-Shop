@@ -18,10 +18,12 @@ const createUser = async (req: Request, res: Response) => {
     const new_User = await user.addUser(userData);
     res.json(new_User);
   } catch (err) {
-    res.json({
-      error: true,
-      response_msg: "Server Error Contact Administrator.",
-    });
+    res
+      .json({
+        error: true,
+        response_msg: "Server Error Contact Administrator.",
+      })
+      .status(500);
   }
 };
 
