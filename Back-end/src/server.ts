@@ -86,13 +86,13 @@ export default app;
  *   post:
  *     summary: Insert new user in database
  *     tags: [User Endpoint]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Create User'
  *     responses:
  *       200:
- *         description: The list of the books
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Create User'
+ *         description: Insert New user in database
  */
