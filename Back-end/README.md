@@ -36,16 +36,16 @@
 
 ### You need to add .env in root
 
-POSTGRS_HOST=localhost
-POSTGRS_DB=E_Shop
-POSTGRS_USER=Mohammed_Salah
-POSTGRS_PASSWORD=Mohammed123#
-POSTGRS_DB_TEST=E_Shop_Test
-ENV=dev
-PORT=8002
-BCRYPT_PASSWORD=bla-bla-bla-mo-salah
-SALT_ROUNDS=10
-SECRET_KEY=MoSalah
+POSTGRS_HOST=localhost  
+POSTGRS_DB=E_Shop  
+POSTGRS_USER=Mohammed_Salah  
+POSTGRS_PASSWORD=Mohammed123#  
+POSTGRS_DB_TEST=E_Shop_Test  
+ENV=dev  
+PORT=8002  
+BCRYPT_PASSWORD=bla-bla-bla-mo-salah  
+SALT_ROUNDS=10  
+SECRET_KEY=MoSalah  
 
 ---
 
