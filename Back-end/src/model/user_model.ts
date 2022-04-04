@@ -17,11 +17,11 @@ const { BCRYPT_PASSWORD, SALT_ROUNDS } = process.env;
 // Class Contain all User Function
 export class User_Class {
   // Check if user's email is already in database or Not & status of account
-  async emailExist(email: string): Promise<string> {
+  async emailExist(email: string, status: string): Promise<string> {
     const checkEmailSql =
       "SELECT email,id FROM user_shop WHERE email=($1) AND status=($2);";
     const conn = await Client.connect();
-    const result = await conn.query(checkEmailSql, [email, "Pending"]);
+    const result = await conn.query(checkEmailSql, [email, status]);
     conn.release();
     return result as unknown as string;
   }
@@ -34,16 +34,16 @@ export class User_Class {
       // Exist User id
       let idFromUser;
       // take value from emailExist function
-      await this.emailExist(newUser.email).then(function (res) {
+      await this.emailExist(newUser.email, "Pending").then(function (res) {
         if (JSON.parse(JSON.stringify(res)).rows.length === 0) {
-          found = true;
-        } else {
           found = false;
+        } else {
+          found = true;
           idFromUser = JSON.parse(JSON.stringify(res)).rows[0].id;
         }
       });
       // if data not found in database add user
-      if (found == true) {
+      if (found == false) {
         const hash = bcrypt.hashSync(
           newUser.password + BCRYPT_PASSWORD,
           parseInt(SALT_ROUNDS as string)
@@ -152,6 +152,52 @@ export class User_Class {
         await conn.query(sqltoken, [null, email]);
         conn.release();
       }, 3600000);
+    } catch {
+      return {
+        response_msg:
+          "The format of the data you are trying to send is the wrong format.",
+        error: true,
+      };
+    }
+  }
+
+  // Set unique id for user to handel forget password request
+  async setUniqueID(unid: string, email: string) {
+    try {
+      let found;
+      // take value from emailExist function
+      await this.emailExist(email, "Active").then(function (res) {
+        if (JSON.parse(JSON.stringify(res)).rows.length !== 0) {
+          found = true;
+        } else {
+          found = false;
+        }
+      });
+      if (found == true) {
+        const sqlSetUniqueID =
+          "UPDATE user_shop SET unid=($1) WHERE email=($2)";
+        const conn = await Client.connect();
+        await conn.query(sqlSetUniqueID, [unid, email]);
+        conn.release();
+        // 20 min
+        setTimeout(async () => {
+          const conn = await Client.connect();
+          await conn.query(sqlSetUniqueID, [null, email]);
+          conn.release();
+        }, 1200000);
+        return {
+          response_msg:
+            "The password update code has been added to the database.",
+          error: false,
+        };
+      } else {
+        return {
+          response_msg:
+            "This account is not in the database, please sign up first.",
+          error: true,
+          status: 404,
+        };
+      }
     } catch {
       return {
         response_msg:
