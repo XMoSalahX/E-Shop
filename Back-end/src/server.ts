@@ -163,3 +163,43 @@ export default app;
  *       500:
  *         description: Server Error
  */
+////////////////////////////////////////////////////////////////////////////
+
+// Forget password
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Forget password:
+ *       type: object
+ *       required:
+ *         - email
+ *       properties:
+ *         email:
+ *           type: string
+ *       example:
+ *         email: mohammedsalah6055@gmail.com
+ */
+
+/**
+ * @swagger
+ * /forgetpassword:
+ *   put:
+ *     summary: Send password code to user
+ *     tags: [User Endpoint]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Forget password'
+ *     responses:
+ *       200:
+ *         description: Success
+ *       404:
+ *         description: User Not Found
+ *       400:
+ *         description: Invaild Data Entry
+ *       500:
+ *         description: Server Error
+ */
