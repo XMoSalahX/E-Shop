@@ -16,7 +16,7 @@
 
 * To create E-Shop database, write the following command:
 
-      CREATE DATABASE "E-Shop";
+      CREATE DATABASE "E_Shop";
 
 * To create E-Shop_Test database, write the following command:
 
@@ -28,7 +28,7 @@
 
 * To make connection between user and production database, write the following command:
 
-      GRANT ALL PRIVILEGES ON DATABASE "E-Shop" TO "Mohammed_Salah";
+      GRANT ALL PRIVILEGES ON DATABASE "E_Shop" TO "Mohammed_Salah";
 
 * To make connection between user and testing database, write the following command:
 
@@ -36,16 +36,18 @@
 
 ### You need to add .env in root
 
-POSTGRS_HOST=localhost  
-POSTGRS_DB=E_Shop  
-POSTGRS_USER=Mohammed_Salah  
-POSTGRS_PASSWORD=Mohammed123#  
-POSTGRS_DB_TEST=E_Shop_Test  
-ENV=dev  
-PORT=8002  
-BCRYPT_PASSWORD=bla-bla-bla-mo-salah  
-SALT_ROUNDS=10  
-SECRET_KEY=MoSalah  
+POSTGRS_HOST=localhost
+POSTGRS_DB=E_Shop
+POSTGRS_USER=Mohammed_Salah
+POSTGRS_PASSWORD=Mohammed123#
+POSTGRS_DB_TEST=E_Shop_Test
+ENV=dev
+PORT=8002
+BCRYPT_PASSWORD=bla-bla-bla-mo-salah
+SALT_ROUNDS=10
+SECRET_KEY=MoSalah
+EMAIL=lomasoma533@gmail.com
+EMAIL_PASS='Maxmam123#'
 
 ---
 
