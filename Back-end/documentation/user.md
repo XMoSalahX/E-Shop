@@ -15,3 +15,16 @@
   "responsibility": "Admin"
 }
 ```
+
+**PUT request "/verify/:id" : to verify new User in database**
+
+**POST request "/login" : to login User account**
+
+- You will send json object in post request like this:
+
+```json
+{
+  "email": "mohammedsalah6055@gmail.com",
+  "password": "Mohammed123#"
+}
+```
