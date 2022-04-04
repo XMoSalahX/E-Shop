@@ -26,6 +26,13 @@ describe("Check user EndPoint: ", () => {
       expect(response.status).toBe(200);
     };
   });
+
+  it('The connection to the endpoint "/forgetpassword" has been successful.', async () => {
+    async () => {
+      const response = await request.put("/forgetpassword");
+      expect(response.status).toBe(200);
+    };
+  });
 });
 
 describe("Check all user function: ", () => {
@@ -51,6 +58,10 @@ describe("Check all user function: ", () => {
 
   it("settocken function has been defined", () => {
     expect(user.settocken).toBeDefined();
+  });
+
+  it("setUniqueID function has been defined", () => {
+    expect(user.setUniqueID).toBeDefined();
   });
 });
 
@@ -78,7 +89,10 @@ describe("Check user database action: ", () => {
   });
 
   it("Database action to 'emailExist' function got the correct answer.", async () => {
-    const result = await user.emailExist("mohammedsalah605s5@gmail.com");
+    const result = await user.emailExist(
+      "mohammedsalah605s5@gmail.com",
+      "Pending"
+    );
     expect(JSON.parse(JSON.stringify(result)).rows.length).toEqual(1);
   });
 
@@ -93,5 +107,21 @@ describe("Check user database action: ", () => {
       "Mohammed123#"
     );
     expect(result).toEqual("null");
+  });
+
+  it("Database action to 'setUniqueID' function got the correct answer.", async () => {
+    const result = await user.setUniqueID(
+      "dgasgasgasg",
+      "mohammedsalah605s5@gmail.com"
+    );
+    expect(result.error).toEqual(false);
+  });
+
+  it("Database action to 'setUniqueID' function not found user.", async () => {
+    const result = await user.setUniqueID(
+      "dgasgasgasg",
+      "mohammedsalah605s5asdas@gmail.com"
+    );
+    expect(result.error).toEqual(true);
   });
 });
