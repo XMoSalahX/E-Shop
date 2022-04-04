@@ -7,7 +7,8 @@
         "test": "npm run build && SET ENV=test && db-migrate --env test up && npm run jasmine && db-migrate --env test reset",
         "build": "npx tsc",
         "jasmine": "jasmine",
-        "start": "start http://localhost:8003/api-docs/ && npx nodemon ./src/server.ts --watch "
+        "start": "start http://localhost:8003/api-docs/ && npx nodemon ./src/server.ts --watch ",
+        "reset:db": "db-migrate down && db-migrate up"
     },
     "repository": {
         "type": "git",
@@ -28,6 +29,7 @@
         "@types/express": "^4.17.13",
         "@types/jasmine": "^4.0.2",
         "@types/node": "^17.0.23",
+        "@types/nodemailer": "^6.4.4",
         "@types/pg": "^8.6.5",
         "@types/supertest": "^2.0.12",
         "@types/swagger-jsdoc": "^6.0.1",
@@ -46,9 +48,12 @@
         "yarn": "^1.22.18"
     },
     "dependencies": {
+        "@types/jsonwebtoken": "^8.5.8",
         "bcrypt": "^5.0.1",
         "dotenv": "^16.0.0",
         "express": "^4.17.3",
+        "jsonwebtoken": "^8.5.1",
+        "nodemailer": "^6.7.3",
         "pg": "^8.7.3"
     }
 }
