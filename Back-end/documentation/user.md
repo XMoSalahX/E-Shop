@@ -28,3 +28,13 @@
   "password": "Mohammed123#"
 }
 ```
+
+**PUT request "/forgetpassword" : to send temporary code to user**
+
+- You will send json object in post request like this:
+
+```json
+{
+  "email": "mohammedsalah6055@gmail.com"
+}
+```
