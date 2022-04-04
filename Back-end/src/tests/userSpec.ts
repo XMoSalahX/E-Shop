@@ -12,6 +12,20 @@ describe("Check user EndPoint: ", () => {
       expect(response.status).toBe(200);
     };
   });
+
+  it('The connection to the endpoint "/verify/:id" has been successful.', async () => {
+    async () => {
+      const response = await request.put("/verify/1");
+      expect(response.status).toBe(200);
+    };
+  });
+
+  it('The connection to the endpoint "/login" has been successful.', async () => {
+    async () => {
+      const response = await request.post("/login");
+      expect(response.status).toBe(200);
+    };
+  });
 });
 
 describe("Check all user function: ", () => {
@@ -21,6 +35,22 @@ describe("Check all user function: ", () => {
 
   it("addUser function has been defined", () => {
     expect(user.addUser).toBeDefined();
+  });
+
+  it("checkID function has been defined", () => {
+    expect(user.checkID).toBeDefined();
+  });
+
+  it("activeUser function has been defined", () => {
+    expect(user.activeUser).toBeDefined();
+  });
+
+  it("auth function has been defined", () => {
+    expect(user.auth).toBeDefined();
+  });
+
+  it("settocken function has been defined", () => {
+    expect(user.settocken).toBeDefined();
   });
 });
 
@@ -50,5 +80,18 @@ describe("Check user database action: ", () => {
   it("Database action to 'emailExist' function got the correct answer.", async () => {
     const result = await user.emailExist("mohammedsalah605s5@gmail.com");
     expect(JSON.parse(JSON.stringify(result)).rows.length).toEqual(1);
+  });
+
+  it("Database action to 'activeUser' function got the correct answer.", async () => {
+    const result = await user.activeUser(1);
+    expect(result.error).toEqual(false);
+  });
+
+  it("Database action to 'activeUser' function got not the correct answer.", async () => {
+    const result = await user.auth(
+      "mohammedsalah605ss5@gmail.com",
+      "Mohammed123#"
+    );
+    expect(result).toEqual("null");
   });
 });
