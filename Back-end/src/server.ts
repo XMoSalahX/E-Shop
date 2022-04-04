@@ -82,7 +82,7 @@ export default app;
  *         responsibility: Admin
  */
 
-// User Reuest
+// User Request
 /**
  * @swagger
  * /createuser:
@@ -97,6 +97,69 @@ export default app;
  *             $ref: '#/components/schemas/Create User'
  *     responses:
  *       200:
- *         description: Insert New user in database
+ *         description: Success
+ *       500:
+ *         description: Server Error
  */
 ///////////////////////////////////////////////////////////////////////////
+// Active User Request
+/**
+ * @swagger
+ * /verify/{id}:
+ *  put:
+ *    summary: To active user account
+ *    tags: [User Endpoint]
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        schema:
+ *          type: number
+ *        required: true
+ *        description: User id
+ *    responses:
+ *      200:
+ *        description: Success
+ *      500:
+ *        description: Server Error
+ */
+//////////////////////////////////////////////////////////////////////////////
+// Sgin in user request
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Sign in user:
+ *       type: object
+ *       required:
+ *         - email
+ *         - password
+ *       properties:
+ *         email:
+ *           type: string
+ *         password:
+ *           type: string
+ *       example:
+ *         email: mohammedsalah6055@gmail.com
+ *         password: Mohammed123#
+ */
+
+/**
+ * @swagger
+ * /login:
+ *   post:
+ *     summary: Sign in to user account
+ *     tags: [User Endpoint]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Sign in user'
+ *     responses:
+ *       200:
+ *         description: Success
+ *       404:
+ *         description: User Not Found
+ *       500:
+ *         description: Server Error
+ */
