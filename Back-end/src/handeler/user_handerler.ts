@@ -105,12 +105,38 @@ const forgetPassword = async (req: Request, res: Response) => {
   }
 };
 
+// Change user password
+const changePassword = async (req: Request, res: Response) => {
+  try {
+    const dbResponse = await user.ChangePassword(
+      req.body.uniq,
+      req.body.password
+    );
+    console.log(dbResponse);
+    if (dbResponse.error == true) {
+      if (dbResponse.status == 404) {
+        res.status(404).json(dbResponse);
+      } else {
+        res.status(400).json(dbResponse);
+      }
+    } else {
+      res.status(200).json(dbResponse);
+    }
+  } catch {
+    res.status(500).json({
+      error: true,
+      response_msg: "Server Error Contact Administrator.",
+    });
+  }
+};
+
 // Route User EndPoint
 const userEndPoint = (app: Application) => {
   app.post("/createuser", createUser);
   app.put("/verify/:id", emailerify);
   app.post("/login", login);
   app.put("/forgetpassword", forgetPassword);
+  app.put("/changepassword", changePassword);
 };
 
 export default userEndPoint;
