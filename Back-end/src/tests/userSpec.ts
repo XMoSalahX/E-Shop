@@ -33,6 +33,12 @@ describe("Check user EndPoint: ", () => {
       expect(response.status).toBe(200);
     };
   });
+  it('The connection to the endpoint "/changepassword" has been successful.', async () => {
+    async () => {
+      const response = await request.put("/changepassword");
+      expect(response.status).toBe(200);
+    };
+  });
 });
 
 describe("Check all user function: ", () => {
@@ -62,6 +68,13 @@ describe("Check all user function: ", () => {
 
   it("setUniqueID function has been defined", () => {
     expect(user.setUniqueID).toBeDefined();
+  });
+
+  it("hashPass function has been defined", () => {
+    expect(user.hashPass).toBeDefined();
+  });
+  it("hasChangePasswordhPass function has been defined", () => {
+    expect(user.ChangePassword).toBeDefined();
   });
 });
 
@@ -122,6 +135,16 @@ describe("Check user database action: ", () => {
       "dgasgasgasg",
       "mohammedsalah605s5asdas@gmail.com"
     );
+    expect(result.error).toEqual(true);
+  });
+
+  it("Database action to '/changepassword' Password has been updated .", async () => {
+    const result = await user.ChangePassword("dgasgasgasg", "mosa");
+    expect(result.error).toEqual(false);
+  });
+
+  it("Database action to '/changepassword' Password has not been updated .", async () => {
+    const result = await user.ChangePassword("dgasgasgasg", "mosa");
     expect(result.error).toEqual(true);
   });
 });
