@@ -20,7 +20,7 @@
 
 **POST request "/login" : to login User account**
 
-- You will send json object in post request like this:
+- You will send json object in POST request like this:
 
 ```json
 {
@@ -31,10 +31,21 @@
 
 **PUT request "/forgetpassword" : to send temporary code to user**
 
-- You will send json object in post request like this:
+- You will send json object in PUT request like this:
 
 ```json
 {
   "email": "mohammedsalah6055@gmail.com"
+}
+```
+
+**PUT request "/changepassword" : to Change user is password**
+
+- You will send json object in PUT request like this:
+
+```json
+{
+  "uniq": "g2pcdc9ol1ldk0bx",
+  "password": "Medoooo"
 }
 ```
