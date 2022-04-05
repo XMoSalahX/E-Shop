@@ -45,7 +45,7 @@ export default app;
 /**
  * @swagger
  * tags:
- *   name: User Endpoint
+ *   name: Account Endpoint
  *   description: CRUD operation for user
  */
 //////////////////////////////////////////////////////////////////////////////////
@@ -88,7 +88,7 @@ export default app;
  * /createuser:
  *   post:
  *     summary: Insert new user in database
- *     tags: [User Endpoint]
+ *     tags: [Account Endpoint]
  *     requestBody:
  *       required: true
  *       content:
@@ -108,7 +108,7 @@ export default app;
  * /verify/{id}:
  *  put:
  *    summary: To active user account
- *    tags: [User Endpoint]
+ *    tags: [Account Endpoint]
  *    parameters:
  *      - in: path
  *        name: id
@@ -148,7 +148,7 @@ export default app;
  * /login:
  *   post:
  *     summary: Sign in to user account
- *     tags: [User Endpoint]
+ *     tags: [Account Endpoint]
  *     requestBody:
  *       required: true
  *       content:
@@ -186,13 +186,57 @@ export default app;
  * /forgetpassword:
  *   put:
  *     summary: Send password code to user
- *     tags: [User Endpoint]
+ *     tags: [Account Endpoint]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
  *             $ref: '#/components/schemas/Forget password'
+ *     responses:
+ *       200:
+ *         description: Success
+ *       404:
+ *         description: User Not Found
+ *       400:
+ *         description: Invaild Data Entry
+ *       500:
+ *         description: Server Error
+ */
+//////////////////////////////////////////////////////////////////
+// Change password
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Change password:
+ *       type: object
+ *       required:
+ *         - uniq
+ *         - password
+ *       properties:
+ *         uniq:
+ *           type: string
+ *           description: You can get "uniq" when using "/forgotpassword" through the email used.
+ *         password:
+ *           type: string
+ *       example:
+ *         uniq: sdg5s5dg151
+ *         password: Mohammed123#
+ */
+
+/**
+ * @swagger
+ * /changepassword:
+ *   put:
+ *     summary: Change user is password
+ *     tags: [Account Endpoint]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Change password'
  *     responses:
  *       200:
  *         description: Success
