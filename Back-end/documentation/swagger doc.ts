@@ -2,7 +2,7 @@ import { Application } from "express";
 import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 
-const x = (app: Application) => {
+const swaggerDocs = (app: Application) => {
   // Swagger Configuration
   const options = {
     definition: {
@@ -226,4 +226,4 @@ const x = (app: Application) => {
    */
 };
 
-export default x;
+export default swaggerDocs;
