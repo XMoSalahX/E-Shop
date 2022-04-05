@@ -26,6 +26,13 @@ export class User_Class {
     return result as unknown as string;
   }
 
+  hashPass(pass: string) {
+    return bcrypt.hashSync(
+      pass + BCRYPT_PASSWORD,
+      parseInt(SALT_ROUNDS as string)
+    );
+  }
+
   // Connect to database and send user data
   async addUser(newUser: Add_User_Type) {
     try {
@@ -44,10 +51,7 @@ export class User_Class {
       });
       // if data not found in database add user
       if (found == false) {
-        const hash = bcrypt.hashSync(
-          newUser.password + BCRYPT_PASSWORD,
-          parseInt(SALT_ROUNDS as string)
-        );
+        const hash = this.hashPass(newUser.password);
         const insertUserSql =
           "INSERT INTO user_shop(first_name,last_name,email,password,responsibility,status,restrictions,jwt) VALUES($1,$2,$3,$4,$5,$6,$7,$8) RETURNING id";
         const conn = await Client.connect();
@@ -196,6 +200,36 @@ export class User_Class {
             "This account is not in the database, please sign up first.",
           error: true,
           status: 404,
+        };
+      }
+    } catch {
+      return {
+        response_msg:
+          "The format of the data you are trying to send is the wrong format.",
+        error: true,
+      };
+    }
+  }
+
+  // Change user password in database
+  async ChangePassword(uniq: string, newpassword: string) {
+    try {
+      const hash = this.hashPass(newpassword);
+      const sqlChangePass =
+        "UPDATE user_shop SET password=($1),unid=('') WHERE unid=($2) RETURNING id";
+      const conn = await Client.connect();
+      const result = await conn.query(sqlChangePass, [hash, uniq]);
+      conn.release();
+      if (result.rows.length === 0) {
+        return {
+          error: true,
+          response_msg: "This code is expired.",
+          status: 404,
+        };
+      } else {
+        return {
+          error: false,
+          response_msg: "Password has been updated.",
         };
       }
     } catch {
