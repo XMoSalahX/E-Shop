@@ -1,0 +1,559 @@
+openapi: 3.0.0
+info:
+  title: E-Commerce
+  description: E-commerce website to improve relationship between seller and customer.
+  version: 1.0
+  contact:
+    email: mohammedsalah6055@gmail.com
+  servers:
+    -url: http://localhost:8003
+    description: THis is my local Server
+    -url: http://example.com/
+    description: This is my original URL
+schemes: [https,http]
+
+# Groups
+# User group
+tags:
+  name: Account Endpoint
+  description: CRUD operation for user
+
+paths:
+# Create user request
+  /createuser:
+    post:
+      summary: Insert new user in database
+      tags: [Account Endpoint]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Create User'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response Create User'
+        400:
+          description: Syntax Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error 400'
+        404:
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error 404'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error 500'
+  # Active User Request
+  /verify/{id}:
+    put:
+      summary: To active user account
+      tags: [Account Endpoint]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+          required: true
+          description: User id
+      responses:
+        200:
+          description: Success
+          description: Your account has been activated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response verify'
+        400:
+          description: Syntax Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error 400'
+        404:
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error 404'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error 500'
+# Forget request
+  /forgetpassword:
+    put:
+      summary: Send password code to user
+      tags: [Account Endpoint]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Forget password'
+      responses:
+        200:
+          description: Success
+          description: The message has been sent successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response forget'
+        400:
+          description: Syntax Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error 400'
+        404:
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error 404'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error 500'
+# Change password
+  /changepassword:
+    put:
+      summary: Change user is password
+      tags: [Account Endpoint]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Change password'
+      responses:
+        200:
+          description: Success
+          description: Password has been updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response change password'
+        400:
+          description: Syntax Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error 400'
+        404:
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error 404'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error 500'
+# login request
+  /login:
+    put:
+      summary: Sign in to user account
+      tags: [Account Endpoint]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sign in user'
+      responses:
+        200:
+          description: Success
+          description: access success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response sign in'
+        400:
+          description: Syntax Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error 400'
+        404:
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error 404'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error 500'
+# Get users request
+  /getusers:
+    post:
+      summary: Get users.
+      security:
+        - BearerAuth: [admin]
+      tags: [Account Endpoint]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Get users'
+      responses:
+        200:
+          description: Success
+          description: Success found it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response get users'
+        400:
+          description: Syntax Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error 400'
+        401:
+          description: Unauthorized request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error 401'
+        404:
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error 404'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error 500'
+# Get user request 
+  /getuser:
+    post:
+      summary: Get user.
+      security:
+        - BearerAuth: [admin]
+      tags: [Account Endpoint]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Get user'
+            examples:
+              First:
+                value:
+                  id: 1
+              Second:
+                value:
+                  email: "mohammedsalah6055@gmail.com"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response get user'
+        400:
+          description: Syntax Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error 400'
+        401:
+          description: Unauthorized request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error 401'
+        404:
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error 404'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error 500'
+
+# Create Schemas
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    Create User:
+      type: object
+      required:
+        - firstName
+        - lastName
+        - email
+        - password
+        - responsibility
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        responsibility:
+          type: string
+          description: "(Admin - Seller - Customer)"
+      example:
+        firstName: Mohammed
+        lastName: Salah
+        email: mohammedsalah6055@gmail.com
+        password: Mohammed123#
+        responsibility: Admin
+    Response Create User:
+      type: object
+      properties:
+        response_msg:
+          type: string
+        error:
+          type: boolean
+        status:
+          type: number
+        id:
+          type: number
+      example:
+        response_msg: The registration process was successful, please activate your account.
+        error: false
+        status: 200
+        id: 1
+    Response verify:
+      type: object
+      properties:
+        error:
+          type: boolean
+        response_msg:
+          type: string
+      example:
+        error: false
+        response_msg: Your account has been activated.
+    Forget password:
+      type: object
+      required:
+        - email
+      properties:
+        email:
+          type: string
+      example:
+        email: mohammedsalah6055@gmail.com
+    Response forget:
+      type: object
+      properties:
+        error:
+          type: boolean
+        response_msg:
+          type: string
+      example:
+        error: false
+        response_msg: The message has been sent successfully.
+    Change password:
+      type: object
+      required:
+        - uniq
+        - password
+      properties:
+        uniq:
+          type: string
+          description: You can get "uniq" when using "/forgotpassword" through the email used.
+        password:
+          type: string
+      example:
+        uniq: sdg5s5dg151
+        password: Mohammed123#
+    Response change password:
+      type: object
+      properties:
+        error:
+          type: boolean
+        response_msg:
+          type: string
+      example:
+        error: false
+        response_msg: Password has been updated.
+    Sign in user:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: mohammedsalah6055@gmail.com
+        password: Mohammed123#
+    Response sign in:
+      type: object
+      properties:
+        error:
+          type: boolean
+        accessToken:
+          type: string
+      example:
+        error: false
+        accessToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6Im1vaGFtbWVkc2FsYWg2MDU1QGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJFZKbzlsb0Y0TzJOeVFYVEhBSmljRE9KOWhxTHJOekFJajdHOGRmanA1ajBwLmExaG90bGdTIn0sImlhdCI6MTY0OTYwMzE2NH0.GEulrRO745ZBcG320PLHppPsj3Ewd4UO7CIlzpquLVs
+    Get users:
+      type: object
+      required:
+        - responsibility
+        - from
+        - count
+      properties:
+        responsibility:
+          type: string
+        from:
+          type: number
+        count:
+          type: number
+      example:
+        responsibility: Admin
+        from: 1
+        count: 20
+    Response get users:
+      type: object
+      properties:
+        error:
+          type: boolean
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: number
+              first_name:
+                type: string
+              last_name:
+                type: string
+              email:
+                type: string
+              status:
+                type: string
+              restrictions:
+                type: string
+      example:
+        error: false
+        data: [{"id": 1,"first_name": "Mohammed","last_name": "Salah","email": "mohammedsalah6055@gmail.com","status": "Pending","restrictions": "Nothing"}]
+    Get user:
+      description: sent id or email
+      type: object
+      required:
+        - id
+        - email
+      properties:
+        id:
+          type: number
+        email:
+          type: string
+      example:
+        id: 1
+    Response get user:
+      type: object
+      properties:
+        error:
+          type: boolean
+        data:
+          type: object
+          properties:
+            id:
+              type: number
+            first_name:
+              type: string
+            last_name:
+              type: string
+            email:
+              type: string
+            status:
+              type: string
+            restrictions:
+              type: string
+      example:
+        error: false
+        data: {"id": 1,"first_name": "Mohammed","last_name": "Salah","email": "mohammedsalah6055@gmail.com","status": "Pending","restrictions": "Nothing"}
+    Error 400:
+      type: object
+      properties:
+        error:
+          type: boolean
+        response_msg:
+          type: string
+        status:
+          type: number
+      example:
+        error: true
+        response_msg: The format of the data you are trying to send is the wrong format.
+        status: 400
+    Error 401:
+      type: object
+      properties:
+        error:
+          type: boolean
+        response_msg:
+          type: string
+        status:
+          type: number
+      example:
+        error: true
+        response_msg: Your session has expired, please log in again.
+        status: 401
+    Error 404:
+      type: object
+      properties:
+        error:
+          type: boolean
+        response_msg:
+          type: string
+        status:
+          type: number
+      example:
+        error: true
+        response_msg: Your request was not found in the database.
+        status: 404
+    Error 500:
+      type: object
+      properties:
+        error:
+          type: boolean
+        response_msg:
+          type: string
+        status:
+          type: number
+      example:
+        error: true
+        response_msg: Server Error Contact Administrator.
+        status: 500
+    
