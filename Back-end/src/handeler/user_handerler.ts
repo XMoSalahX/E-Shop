@@ -5,7 +5,10 @@ import mailer from "../utlities/mail controler";
 import jwt from "jsonwebtoken";
 import uniqID from "uniqid";
 import { verify } from "crypto";
+import { Error } from "../utlities/error_response";
+
 const user = new User_Class();
+const error = new Error();
 
 // Creat User Handeler
 const createUser = async (req: Request, res: Response) => {
@@ -19,30 +22,35 @@ const createUser = async (req: Request, res: Response) => {
       responsibility: req.body.responsibility,
     };
     const new_User = await user.addUser(userData);
-    if (new_User.error === false) {
-      mailer(userData.email, new_User.id, "verify");
-    } else {
+    if (new_User.status == "Pending") {
       mailer(userData.email, new_User.id, "verify");
     }
-    res.json(new_User);
+    if (new_User.error == false) {
+      res.status(200).json(new_User);
+    } else {
+      res.status(400).json(new_User);
+    }
   } catch (err) {
-    res.status(500).json({
-      error: true,
-      response_msg: "Server Error Contact Administrator.",
-    });
+    res.status(500).json(error.error_500);
   }
 };
 
 // Verification handeler
 const emailerify = async (req: Request, res: Response) => {
   try {
-    const confirm = await user.activeUser(Number(req.params.id));
-    res.json(confirm);
+    if (!isNaN(req.params.id as unknown as number)) {
+      const confirm = await user.activeUser(Number(req.params.id));
+      console.log(confirm);
+      if (confirm.error == false) {
+        res.status(200).json(confirm);
+      } else {
+        res.status(404).json(confirm);
+      }
+    } else {
+      res.status(400).json(error.error_400);
+    }
   } catch {
-    res.status(500).json({
-      error: true,
-      response_msg: "Server Error Contact Administrator.",
-    });
+    res.status(500).json(error.error_500);
   }
 };
 
@@ -54,30 +62,25 @@ const login = async (req: Request, res: Response) => {
       password: req.body.password,
     };
     const resFromModel = await user.auth(data.email, data.password);
-    if (!resFromModel.error || resFromModel == "null") {
-      if (resFromModel !== "null") {
+    if (resFromModel.email || resFromModel.status == 404) {
+      if (resFromModel.status != 404) {
         const token = jwt.sign(
           { user: resFromModel },
           process.env.SECRET_KEY as string
         );
         await user.settocken(token, data.email);
-        res.json({
+        res.status(200).json({
           error: false,
           accessToken: token,
         });
-      } else {
-        res.status(404).json({
-          error: true,
-          response_msg:
-            "This account is not in the database, please sign up first.",
-        });
+      } else if (resFromModel.status == 404) {
+        res.status(404).json(error.error_404);
       }
+    } else {
+      res.status(400).json(error.error_400);
     }
   } catch {
-    res.status(500).json({
-      error: true,
-      response_msg: "Server Error Contact Administrator.",
-    });
+    res.status(500).json(error.error_500);
   }
 };
 
@@ -98,10 +101,7 @@ const forgetPassword = async (req: Request, res: Response) => {
       res.status(400).json(responseDB);
     }
   } catch {
-    res.status(500).json({
-      error: true,
-      response_msg: "Server Error Contact Administrator.",
-    });
+    res.status(500).json(error.error_500);
   }
 };
 
@@ -112,7 +112,6 @@ const changePassword = async (req: Request, res: Response) => {
       req.body.uniq,
       req.body.password
     );
-    console.log(dbResponse);
     if (dbResponse.error == true) {
       if (dbResponse.status == 404) {
         res.status(404).json(dbResponse);
@@ -123,10 +122,7 @@ const changePassword = async (req: Request, res: Response) => {
       res.status(200).json(dbResponse);
     }
   } catch {
-    res.status(500).json({
-      error: true,
-      response_msg: "Server Error Contact Administrator.",
-    });
+    res.status(500).json(error.error_500);
   }
 };
 
@@ -134,7 +130,7 @@ const changePassword = async (req: Request, res: Response) => {
 const userEndPoint = (app: Application) => {
   app.post("/createuser", createUser);
   app.put("/verify/:id", emailerify);
-  app.post("/login", login);
+  app.put("/login", login);
   app.put("/forgetpassword", forgetPassword);
   app.put("/changepassword", changePassword);
 };
