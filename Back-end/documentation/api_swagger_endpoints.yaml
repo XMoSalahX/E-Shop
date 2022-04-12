@@ -342,13 +342,13 @@ components:
         error:
           type: boolean
         status:
-          type: number
+          type: string
         id:
           type: number
       example:
         response_msg: The registration process was successful, please activate your account.
         error: false
-        status: 200
+        status: Pending
         id: 1
     Response verify:
       type: object
