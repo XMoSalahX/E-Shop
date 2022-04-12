@@ -40,7 +40,6 @@ const emailerify = async (req: Request, res: Response) => {
   try {
     if (!isNaN(req.params.id as unknown as number)) {
       const confirm = await user.activeUser(Number(req.params.id));
-      console.log(confirm);
       if (confirm.error == false) {
         res.status(200).json(confirm);
       } else {
