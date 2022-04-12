@@ -48,7 +48,7 @@ export class User_Class {
           const hash = checker.hashPass(newUser.password);
           const conn = await Client.connect();
           const insertUserSql =
-            "INSERT INTO user_shop(first_name,last_name,email,password,responsibility,status,restrictions,jwt) VALUES($1,$2,$3,$4,$5,$6,$7,$8) RETURNING id";
+            "INSERT INTO user_shop(first_name,last_name,email,password,responsibility,status,restrictions,jwt) VALUES($1,$2,$3,$4,$5,$6,$7,$8) RETURNING id,status";
           const result = await conn.query(insertUserSql, [
             newUser.firstName,
             newUser.lastName,
@@ -64,7 +64,7 @@ export class User_Class {
             response_msg:
               "The registration process was successful, please activate your account.",
             error: false,
-            status: 200,
+            status: result.rows[0].status,
             id: result.rows[0].id,
           };
         } else {
