@@ -13,23 +13,35 @@ const checker = new Checker_Class();
 // Display user handler
 const displayUsers = async (req: Request, res: Response) => {
   try {
-    if (req.headers.authorization == undefined) {
-      res.status(401).json(error.error_401);
+    if (
+      req.body.responsibility == undefined ||
+      req.body.from == undefined ||
+      req.body.count == undefined ||
+      (req.body.responsibility != undefined &&
+        typeof req.body.responsibility != "string") ||
+      (req.body.from != undefined && isNaN(req.body.from)) ||
+      (req.body.count != undefined && isNaN(req.body.count))
+    ) {
+      res.status(400).send(error.error_400);
     } else {
-      if (await checker.authorization(req.headers.authorization as string)) {
-        const data: Seller_Account_Control_Type = {
-          responsibility: req.body.responsibility as string,
-          from: req.body.from as number,
-          count: req.body.count as number,
-        };
-        const dbRespons = await seller.getUsers(data);
-        if (dbRespons.error == false) {
-          res.status(200).json(dbRespons);
-        } else {
-          res.status(400).json(dbRespons);
-        }
-      } else {
+      if (req.headers.authorization == undefined) {
         res.status(401).json(error.error_401);
+      } else {
+        if (await checker.authorization(req.headers.authorization as string)) {
+          const data: Seller_Account_Control_Type = {
+            responsibility: req.body.responsibility as string,
+            from: req.body.from as number,
+            count: req.body.count as number,
+          };
+          const dbRespons = await seller.getUsers(data);
+          if (dbRespons.error == false) {
+            res.status(200).json(dbRespons);
+          } else {
+            res.status(404).json(dbRespons);
+          }
+        } else {
+          res.status(401).json(error.error_401);
+        }
       }
     }
   } catch {
