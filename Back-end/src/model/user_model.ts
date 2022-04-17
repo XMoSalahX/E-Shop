@@ -13,7 +13,6 @@ export type Add_User_Type = {
   lastName: string;
   email: string;
   password: string;
-  responsibility: string;
   status?: string;
 };
 
@@ -28,8 +27,7 @@ export class User_Class {
         newUser.firstName != undefined &&
         newUser.lastName != undefined &&
         newUser.email != undefined &&
-        newUser.password != undefined &&
-        newUser.responsibility != undefined
+        newUser.password != undefined
       ) {
         // Var to hold boolen value to determine if user exist or not
         let found;
@@ -54,7 +52,7 @@ export class User_Class {
             newUser.lastName,
             newUser.email,
             hash,
-            newUser.responsibility,
+            "Customer",
             `Pending`,
             `Nothing`,
             null,
