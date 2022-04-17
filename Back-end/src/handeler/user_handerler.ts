@@ -4,7 +4,6 @@ import { Add_User_Type, User_Class } from "../model/user_model";
 import mailer from "../utlities/mail controler";
 import jwt from "jsonwebtoken";
 import uniqID from "uniqid";
-import { verify } from "crypto";
 import { Error } from "../utlities/error_response";
 
 const user = new User_Class();
@@ -19,7 +18,6 @@ const createUser = async (req: Request, res: Response) => {
       lastName: req.body.lastName,
       email: req.body.email,
       password: req.body.password,
-      responsibility: req.body.responsibility,
     };
     const new_User = await user.addUser(userData);
     if (new_User.status == "Pending") {
