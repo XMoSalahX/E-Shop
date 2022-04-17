@@ -1,0 +1,1 @@
+DROP TABLE Category_D;
