@@ -87,7 +87,6 @@ describe("Check user database action: ", () => {
       lastName: "Salah",
       email: "mohammedsalah6055@gmail.com",
       password: "Mohammed123#",
-      responsibility: "Admin",
     });
     expect(result.error).toEqual(false);
   });
@@ -98,7 +97,6 @@ describe("Check user database action: ", () => {
       lastName: "Salah",
       email: "mohammedsalah6055@gmail.com",
       password: "Mohammed123#",
-      responsibility: "Admin",
     });
     expect(result.status).toEqual("Pending");
   });
