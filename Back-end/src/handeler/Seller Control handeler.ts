@@ -5,6 +5,7 @@ import {
   Seller_Account_Control,
   Seller_Account_Control_Type,
 } from "../model/Seller Control Model";
+import authorizationSA from "../middleware/authorization";
 
 const seller = new Seller_Account_Control();
 const error = new Error();
@@ -24,24 +25,16 @@ const displayUsers = async (req: Request, res: Response) => {
     ) {
       res.status(400).send(error.error_400);
     } else {
-      if (req.headers.authorization == undefined) {
-        res.status(401).json(error.error_401);
+      const data: Seller_Account_Control_Type = {
+        responsibility: req.body.responsibility as string,
+        from: req.body.from as number,
+        count: req.body.count as number,
+      };
+      const dbRespons = await seller.getUsers(data);
+      if (dbRespons.error == false) {
+        res.status(200).json(dbRespons);
       } else {
-        if (await checker.authorization(req.headers.authorization as string)) {
-          const data: Seller_Account_Control_Type = {
-            responsibility: req.body.responsibility as string,
-            from: req.body.from as number,
-            count: req.body.count as number,
-          };
-          const dbRespons = await seller.getUsers(data);
-          if (dbRespons.error == false) {
-            res.status(200).json(dbRespons);
-          } else {
-            res.status(404).json(dbRespons);
-          }
-        } else {
-          res.status(401).json(error.error_401);
-        }
+        res.status(404).json(dbRespons);
       }
     }
   } catch {
@@ -63,18 +56,14 @@ const specificUser = async (req: Request, res: Response) => {
       ) {
         res.status(400).json(error.error_400);
       } else {
-        if (await checker.authorization(req.headers.authorization as string)) {
-          const DBResponse = await checker.accountExist(
-            req.body.email,
-            req.body.id
-          );
-          if (DBResponse.rows.length == 0) {
-            res.status(404).json(error.error_404);
-          } else {
-            res.status(200).json({ error: false, data: DBResponse.rows[0] });
-          }
+        const DBResponse = await checker.accountExist(
+          req.body.email,
+          req.body.id
+        );
+        if (DBResponse.rows.length == 0) {
+          res.status(404).json(error.error_404);
         } else {
-          res.status(401).json(error.error_401);
+          res.status(200).json({ error: false, data: DBResponse.rows[0] });
         }
       }
     }
@@ -84,8 +73,8 @@ const specificUser = async (req: Request, res: Response) => {
 };
 
 const sellerEndpoint = (app: Application) => {
-  app.post("/getusers", displayUsers);
-  app.post("/getuser", specificUser);
+  app.post("/getusers", authorizationSA, displayUsers);
+  app.post("/getuser", authorizationSA, specificUser);
 };
 
 export default sellerEndpoint;
