@@ -28,4 +28,9 @@ export class Error {
     error: true,
     status: 400,
   };
+
+  error_409 = {
+    error: true,
+    response_msg: "Conflict, This Data Already Exists.",
+  };
 }
