@@ -23,7 +23,7 @@ describe("Check all user function: ", () => {
 describe("Check user database action: ", () => {
   it("Database action to '/getusers' Get users correctly .", async () => {
     const result = await seller.getUsers({
-      responsibility: "Admin",
+      responsibility: "Customer",
       from: 1,
       count: 1,
     });
