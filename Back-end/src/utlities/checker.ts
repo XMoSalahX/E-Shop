@@ -61,4 +61,22 @@ export class Checker_Class {
     conn.release();
     return result.rows[0].id;
   }
+
+  // Check if Category exist or not
+  async checkCategory(name: string, location: string) {
+    let target;
+    if (location == "category") {
+      target = "Category_D";
+    } else {
+      target = "Category_D";
+    }
+    const sql = `SELECT "name" FROM ${target} WHERE name=($1);`;
+    const conn = await Client.connect();
+    const result = await conn.query(sql, [name]);
+    if (result.rows.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
