@@ -1,0 +1,1 @@
+CREATE TABLE Category_D("name" VARCHAR(50) PRIMARY KEY,"description" text,"path" VARCHAR[]);
