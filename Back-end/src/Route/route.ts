@@ -1,6 +1,6 @@
 import userEndPoint from "../handeler/user_handerler";
 import { Application } from "express";
-import swagger from "../../documentation/swagger doc";
+import swagger from "../utlities/swagger doc";
 import sellerEndpoint from "../handeler/Seller Control handeler";
 import categoryDEndpoints from "../handeler/category-D-handeler";
 import uploadContantEndpoint from "../handeler/UploadFiles";

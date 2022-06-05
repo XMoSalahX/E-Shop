@@ -8,9 +8,8 @@ info:
   servers:
     -url: http://localhost:8003
     description: THis is my local Server
-    -url: http://example.com/
-    description: This is my original URL
-schemes: [https,http]
+
+schemes: [https, http]
 
 # Groups
 # User group
@@ -18,18 +17,8 @@ tags:
   name: Account Endpoint
   description: CRUD operation for user
 
-# Category Dashboard
-tags:
-  name: Category Dashboard
-  description: CRUD operation for category dashboard
-
-# Upload Dashboard
-tags:
-  name: Upload Dashboard
-  description: CRUD operation for upload files using dashboard
-
 paths:
-# Create user request
+  # Create user request
   /createuser:
     post:
       summary: Insert new user in database
@@ -39,32 +28,32 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Create User'
+              $ref: "#/components/schemas/Create User"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Response Create User'
+                $ref: "#/components/schemas/Response Create User"
         400:
           description: Syntax Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error 400'
+                $ref: "#/components/schemas/Error 400"
         404:
           description: Not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error 404'
+                $ref: "#/components/schemas/Error 404"
         500:
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error 500'
+                $ref: "#/components/schemas/Error 500"
   # Active User Request
   /verify/{id}:
     put:
@@ -79,31 +68,30 @@ paths:
           description: User id
       responses:
         200:
-          description: Success
           description: Your account has been activated.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Response verify'
+                $ref: "#/components/schemas/Response verify"
         400:
           description: Syntax Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error 400'
+                $ref: "#/components/schemas/Error 400"
         404:
           description: Not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error 404'
+                $ref: "#/components/schemas/Error 404"
         500:
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error 500'
-# Forget request
+                $ref: "#/components/schemas/Error 500"
+  # Forget request
   /forgetpassword:
     put:
       summary: Send password code to user
@@ -113,34 +101,33 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Forget password'
+              $ref: "#/components/schemas/Forget password"
       responses:
         200:
-          description: Success
           description: The message has been sent successfully.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Response forget'
+                $ref: "#/components/schemas/Response forget"
         400:
           description: Syntax Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error 400'
+                $ref: "#/components/schemas/Error 400"
         404:
           description: Not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error 404'
+                $ref: "#/components/schemas/Error 404"
         500:
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error 500'
-# Change password
+                $ref: "#/components/schemas/Error 500"
+  # Change password
   /changepassword:
     put:
       summary: Change user is password
@@ -150,34 +137,33 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Change password'
+              $ref: "#/components/schemas/Change password"
       responses:
         200:
-          description: Success
           description: Password has been updated.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Response change password'
+                $ref: "#/components/schemas/Response change password"
         400:
           description: Syntax Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error 400'
+                $ref: "#/components/schemas/Error 400"
         404:
           description: Not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error 404'
+                $ref: "#/components/schemas/Error 404"
         500:
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error 500'
-# login request
+                $ref: "#/components/schemas/Error 500"
+  # login request
   /login:
     put:
       summary: Sign in to user account
@@ -187,34 +173,33 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Sign in user'
+              $ref: "#/components/schemas/Sign in user"
       responses:
         200:
-          description: Success
           description: access success.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Response sign in'
+                $ref: "#/components/schemas/Response sign in"
         400:
           description: Syntax Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error 400'
+                $ref: "#/components/schemas/Error 400"
         404:
           description: Not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error 404'
+                $ref: "#/components/schemas/Error 404"
         500:
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error 500'
-# Get users request
+                $ref: "#/components/schemas/Error 500"
+  # Get users request
   /getusers:
     post:
       summary: Get users.
@@ -226,41 +211,40 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Get users'
+              $ref: "#/components/schemas/Get users"
       responses:
         200:
-          description: Success
           description: Success found it.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Response get users'
+                $ref: "#/components/schemas/Response get users"
         400:
           description: Syntax Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error 400'
+                $ref: "#/components/schemas/Error 400"
         401:
           description: Unauthorized request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error 401'
+                $ref: "#/components/schemas/Error 401"
         404:
           description: Not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error 404'
+                $ref: "#/components/schemas/Error 404"
         500:
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error 500'
+                $ref: "#/components/schemas/Error 500"
           links: https://github.com/settings/admin
-# Get user request 
+  # Get user request
   /getuser:
     post:
       summary: Get user.
@@ -272,7 +256,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Get user'
+              $ref: "#/components/schemas/Get user"
             examples:
               First:
                 value:
@@ -286,33 +270,33 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Response get user'
+                $ref: "#/components/schemas/Response get user"
         400:
           description: Syntax Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error 400'
+                $ref: "#/components/schemas/Error 400"
         401:
           description: Unauthorized request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error 401'
+                $ref: "#/components/schemas/Error 401"
         404:
           description: Not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error 404'
+                $ref: "#/components/schemas/Error 404"
         500:
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error 500'
+                $ref: "#/components/schemas/Error 500"
 
-# Active User Request
+  # Active User Request
   /addCategory:
     get:
       summary: to add new category
@@ -336,33 +320,33 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Respons Category D'
+                $ref: "#/components/schemas/Respons Category D"
         400:
           description: Syntax Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error 400'
+                $ref: "#/components/schemas/Error 400"
         401:
           description: Unauthorized request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error 401'
+                $ref: "#/components/schemas/Error 401"
         409:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error 409'
+                $ref: "#/components/schemas/Error 409"
         500:
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error 500'
+                $ref: "#/components/schemas/Error 500"
 
-# Upload files to dashboard Request
+  # Upload files to dashboard Request
   #File Upload Multiform Data
   /upload:
     post:
@@ -409,25 +393,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error 400'
+                $ref: "#/components/schemas/Error 400"
         401:
           description: Unauthorized request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error 401'
+                $ref: "#/components/schemas/Error 401"
         404:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error 404'
+                $ref: "#/components/schemas/Error 404"
         500:
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error 500'
+                $ref: "#/components/schemas/Error 500"
 
 # Create Schemas
 components:
@@ -590,7 +574,17 @@ components:
                 type: string
       example:
         error: false
-        data: [{"id": 1,"first_name": "Mohammed","last_name": "Salah","email": "mohammedsalah6055@gmail.com","status": "Pending","restrictions": "Nothing"}]
+        data:
+          [
+            {
+              "id": 1,
+              "first_name": "Mohammed",
+              "last_name": "Salah",
+              "email": "mohammedsalah6055@gmail.com",
+              "status": "Pending",
+              "restrictions": "Nothing",
+            },
+          ]
     Get user:
       description: sent id or email
       type: object
@@ -626,7 +620,15 @@ components:
               type: string
       example:
         error: false
-        data: {"id": 1,"first_name": "Mohammed","last_name": "Salah","email": "mohammedsalah6055@gmail.com","status": "Pending","restrictions": "Nothing"}
+        data:
+          {
+            "id": 1,
+            "first_name": "Mohammed",
+            "last_name": "Salah",
+            "email": "mohammedsalah6055@gmail.com",
+            "status": "Pending",
+            "restrictions": "Nothing",
+          }
     Respons Category D:
       type: object
       properties:
@@ -637,7 +639,7 @@ components:
       example:
         error: false
         response_msg: A new section has been added successfully.
-    Error 400: 
+    Error 400:
       type: object
       properties:
         error:
@@ -699,4 +701,3 @@ components:
       example:
         error: true
         response_msg: Conflict, This Data Already Exists.
-    
