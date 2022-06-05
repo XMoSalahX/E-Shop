@@ -24,7 +24,7 @@ E-Shop is a web application that allows you to buy and sell products as it is an
 │   │       └── jasmine.json # The file responsible for jasmine configuration of the specification of the backend.
 │   ├── src # The folder responsible for the source code of the backend.
 │   │   ├── handlers # The folder responsible for the handlers of the backend.
-│   │   │   ├── category-D-handeler.ts # The file responsible for the category D handler of the backend.
+│   │   │   ├── category-D-handeler.ts # The file responsible for the category Dashboard handler of the backend.
 │   │   │   ├── Seller Control handeler.ts # The file responsible for the seller control handeler of the backend.
 │   │   │   ├── UploadFiles.ts # The file responsible for the upload files of the backend.
 │   │   │   └── user_handerler.ts # The file responsible for the user handeler of the backend.
