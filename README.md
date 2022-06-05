@@ -64,6 +64,7 @@ E-Shop is a web application that allows you to buy and sell products as it is an
 │   └── readme.md # Readme file for front-end.
 ├── .gitiignore # The file responsible for the gitignore of the website.
 └── Readme.md # This file.
+```
 
 ## Back-end Documentation
 
@@ -73,13 +74,6 @@ Go to backend documentation: [Click here](./Back-end/)
 
 Go to front-end documentation: [Click here](./Front-end/)
 
-
-
-
-
-
-
-
-
+```
 
 ```
