@@ -6,9 +6,9 @@
 
       npm install
 
-- back-end run on port: 8003
-- database run on port: 8002
-- database server run on: localhost
+- back-end run on port: \***\*8003**
+- database run on port: **8002**
+- database server run on: **localhost**
 
 ### To build your database & user & connection
 
@@ -63,15 +63,25 @@ This data is not sensitive and has been added for testing purposes only
 
 ---
 
-## How to add table to production database
+## Scripts
 
-- db-migrate up: to add all table to database
-- db-migrate down: to delete all table from production database
+### How to add table to production database
 
-## How to add table to development database
+`db-migrate up`: To add all table to database
+`db-migrate down`: To delete all table from production database
 
-- npm run test: to build your application then, add all table then,run jasmine for unit test then, drop database
+### How to add table to development database
 
-## How to run server
+`npm run test`: To build your application then, add all table then,run jasmine for unit test then, drop database.
 
-- npm run start: to start nodemon package to start live server
+### How to run server
+
+`npm run start`: To start nodemon package to start live server.
+
+### How to reset development database
+
+`npm run reset:db`: To reset development database.
+
+### How to reset testing database
+
+`npm run dbtestreset`: To reset testing database.
