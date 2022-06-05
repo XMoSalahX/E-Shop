@@ -67,7 +67,7 @@ This data is not sensitive and has been added for testing purposes only
 
 ### How to add table to production database
 
-`db-migrate up`: To add all table to database
+`db-migrate up`: To add all table to database  
 `db-migrate down`: To delete all table from production database
 
 ### How to add table to development database
