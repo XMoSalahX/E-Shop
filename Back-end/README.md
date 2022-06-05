@@ -88,3 +88,14 @@ This data is not sensitive and has been added for testing purposes only
 ### How to reset testing database
 
 `npm run dbtestreset`: To reset testing database.
+
+## App Dependencies
+Node JS `v18.1.0`  
+Bcrypt `V5.0.1`  
+Dotenv `v16.0.0`  
+Express `v4.17.3`  
+Jsonwebtoken `v8.5.1`  
+Multer `v1.4.4`  
+Nodemailer `v6.7.3`  
+Pg `v8.7.3`  
+uniqid `v5.4.0`  
