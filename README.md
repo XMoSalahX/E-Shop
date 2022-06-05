@@ -73,7 +73,3 @@ Go to backend documentation: [Click here](./Back-end/)
 ## Front-end Documentation
 
 Go to front-end documentation: [Click here](./Front-end/)
-
-```
-
-```
