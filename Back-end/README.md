@@ -47,7 +47,8 @@ BCRYPT_PASSWORD=bla-bla-bla-mo-salah
 SALT_ROUNDS=10  
 SECRET_KEY=MoSalah  
 EMAIL=lomasoma533@gmail.com  
-EMAIL_PASS='Mohammed123#'
+EMAIL_PASS='Mohammed123#'  
+API=http://localhost:8003
 
 ---
 
